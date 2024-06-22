@@ -50,7 +50,7 @@ export default function DataTable({ data }: { data: HotelDetailsProps[] }) {
                 <Card className="w-full">
                     <CardHeader>
                         <CardTitle>Welcome back!</CardTitle>
-                        <CardDescription>Here's a list of hotels in USA!</CardDescription>
+                        <CardDescription>Here&apos;s a list of hotels in USA!</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-2">
                         <div className="flex justify-between">

@@ -10,7 +10,7 @@ export interface HotelDetailsProps {
     website: string;
     phoneno: string;
     hotelUrl: string;
-    emails: string | string[] | RegExpMatchArray | undefined | (string | string[])[];
+    emails: string | string[];
 };
 
 

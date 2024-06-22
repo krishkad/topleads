@@ -70,7 +70,7 @@ export async function scrapeContactDetails(hotel:
         website: string;
         phoneno: string;
         hotelUrl: string;
-    }): Promise<HotelDetailsProps | undefined> {
+    }): Promise<HotelDetailsProps> {
     try {
         if (hotel.website === 'N/A') return {
             ...hotel,
