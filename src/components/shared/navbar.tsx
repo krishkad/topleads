@@ -1,8 +1,9 @@
-import { navLinks } from '@/constant/constant'
-import { AlignRight, Pause, Tag } from 'lucide-react'
-import Link from 'next/link'
-import React from 'react'
-import { Button } from '../ui/button'
+import { navLinks } from '@/constant/constant';
+import { AlignRight, Tag } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
+import { buttonVariants } from '../ui/button';
+import { cn } from '@/lib/utils';
 
 const Navbar = () => {
     return (
@@ -23,7 +24,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="hidden sm:flex items-center justify-center">
-                        <Button variant={'outline'} className="rounded-full text-sm font-semibold hover:bg-primary hover:text-primary-foreground hover:border-primary border-2 border-solid" size={'sm'}>Start Free Trial</Button>
+                        <Link href={'/tools/search-prospect'} className={cn(buttonVariants({ variant: "outline" }), "rounded-full text-sm font-semibold hover:bg-primary hover:text-primary-foreground hover:border-primary border-zinc-800 border-solid")}>Start Free Trial</Link>
                     </div>
                     <div className="block sm:hidden">
                         <AlignRight />
@@ -34,4 +35,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default Navbar;
