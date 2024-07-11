@@ -1,5 +1,5 @@
-import { HotelDetailsProps } from "@/types/index-types"
-
+import { HotelDetailsProps } from "@/types/index-types";
+import dayjs from "dayjs";
 
 export const navLinks = [
     {
@@ -18,7 +18,7 @@ export const navLinks = [
         label: "Support",
         href: "/"
     },
-]
+];
 
 
 export const data: HotelDetailsProps[] = [
@@ -188,4 +188,293 @@ export const data: HotelDetailsProps[] = [
         emails: []
     }
 
-]
+];
+
+export const dayHeader = [
+    {
+        day: 'sun',
+        Label: "SUN",
+        bg: "bg-[#f94144]",
+        text: "text-white",
+        hoverBg: "hover:bg-[#f94144] hover:text-white",
+        active: "bg-[#f94144] text-white"
+    },
+    {
+        day: 'mon',
+        Label: "MON",
+        bg: "bg-[#f3722c]",
+        text: "text-white",
+        hoverBg: "hover:bg-[#f3722c] hover:text-white",
+        active: "bg-[#f3722c] text-white"
+    },
+    {
+        day: 'tue',
+        Label: "TUE",
+        bg: "bg-[#f8961e]",
+        text: "text-white",
+        hoverBg: "hover:bg-[#f8961e] hover:text-white",
+        active: "bg-[#f8961e] text-white"
+    },
+    {
+        day: 'wed',
+        Label: "WED",
+        bg: "bg-[#f9c74f]",
+        text: "text-white",
+        hoverBg: "hover:bg-[#f9c74f] hover:text-white",
+        active: "bg-[#f9c74f] text-white"
+    },
+    {
+        day: 'thu',
+        Label: "THU",
+        bg: "bg-[#90be6d]",
+        text: "text-white",
+        hoverBg: "hover:bg-[#90be6d] hover:text-white",
+        active: "bg-[#90be6d] text-white"
+    },
+    {
+        day: 'fri',
+        Label: "FRI",
+        bg: "bg-[#43aa8b]",
+        text: "text-white",
+        hoverBg: "hover:bg-[#43aa8b] hover:text-white",
+        active: "bg-[#43aa8b] text-white"
+    },
+    {
+        day: 'sat',
+        Label: "SAT",
+        bg: "bg-[#577590]",
+        text: "text-white",
+        hoverBg: "hover:bg-[#577590] hover:text-white",
+        active: "bg-[#577590] text-white"
+    },
+];
+
+export const MonthsTitle = [
+    {
+        value: 'jan',
+        Label: "Jan"
+    },
+    {
+        value: 'feb',
+        Label: "Feb"
+    },
+    {
+        value: 'mar',
+        Label: "Mar"
+    },
+    {
+        value: 'apr',
+        Label: "Apr"
+    },
+    {
+        value: 'may',
+        Label: "May"
+    },
+    {
+        value: 'jun',
+        Label: "Jun"
+    },
+    {
+        value: 'jul',
+        Label: "Jul"
+    },
+    {
+        value: 'aug',
+        Label: "Aug"
+    },
+    {
+        value: 'sep',
+        Label: "Sep"
+    },
+    {
+        value: 'oct',
+        Label: "Oct"
+    },
+    {
+        value: 'nov',
+        Label: "Nov"
+    },
+    {
+        value: 'dec',
+        Label: "Dec"
+    },
+];
+
+
+export const sampleWeekEvents = [
+    {
+        title: "Event 1",
+        description: "Event Description",
+        top: 0,
+        color: 'bg-blue-500',
+        day: dayjs(new Date(2024, 6, 9))
+    },
+    {
+        title: "Event 2",
+        description: "Event Description",
+        top: 540,
+        color: 'bg-[#feb94a]',
+        day: dayjs(new Date(2024, 6, 9))
+    },
+    {
+        title: "Event 3",
+        description: "Event Description",
+        top: 300,
+        color: 'bg-[#0d9937]',
+        day: dayjs(new Date(2024, 6, 9))
+    },
+    {
+        title: "Event 4",
+        description: "Event Description",
+        top: 120,
+        color: 'bg-[#ff595e]',
+        day: dayjs(new Date(2024, 6, 9))
+    },
+    {
+        title: "Event 5",
+        description: "Event Description",
+        top: 660,
+        color: 'bg-[#ff6600]',
+        day: dayjs(new Date(2024, 6, 9))
+    },
+    {
+        title: "Event 1",
+        description: "Event Description",
+        top: 0,
+        color: 'bg-blue-500',
+        day: dayjs(new Date(2024, 6, 11))
+    },
+    {
+        title: "Event 2",
+        description: "Event Description",
+        top: 540,
+        color: 'bg-[#feb94a]',
+        day: dayjs(new Date(2024, 6, 11))
+    },
+    {
+        title: "Event 3",
+        description: "Event Description",
+        top: 300,
+        color: 'bg-[#0d9937]',
+        day: dayjs(new Date(2024, 6, 11))
+    },
+    {
+        title: "Event 4",
+        description: "Event Description",
+        top: 120,
+        color: 'bg-[#ff595e]',
+        day: dayjs(new Date(2024, 6, 11))
+    },
+    {
+        title: "Event 5",
+        description: "Event Description",
+        top: 660,
+        color: 'bg-[#ff6600]',
+        day: dayjs(new Date(2024, 6, 11))
+    },
+    {
+        title: "Event 1",
+        description: "Event Description",
+        top: 180,
+        color: 'bg-blue-500',
+        day: dayjs(new Date(2024, 6, 10))
+    },
+    {
+        title: "Event 2",
+        description: "Event Description",
+        top: 360,
+        color: 'bg-[#feb94a]',
+        day: dayjs(new Date(2024, 6, 10))
+    },
+    {
+        title: "Event 3",
+        description: "Event Description",
+        top: 720,
+        color: 'bg-[#0d9937]',
+        day: dayjs(new Date(2024, 6, 10))
+    },
+    {
+        title: "Event 4",
+        description: "Event Description",
+        top: 1200,
+        color: 'bg-[#ff595e]',
+        day: dayjs(new Date(2024, 6, 10))
+    },
+    {
+        title: "Event 5",
+        description: "Event Description",
+        top: 830,
+        color: 'bg-[#ff6600]',
+        day: dayjs(new Date(2024, 6, 10))
+    },
+    {
+        title: "Event 1",
+        description: "Event Description",
+        top: 360,
+        color: 'bg-blue-500',
+        day: dayjs(new Date(2024, 6, 8))
+    },
+    {
+        title: "Event 2",
+        description: "Event Description",
+        top: 60,
+        color: 'bg-[#feb94a]',
+        day: dayjs(new Date(2024, 6, 8))
+    },
+    {
+        title: "Event 3",
+        description: "Event Description",
+        top: 480,
+        color: 'bg-[#0d9937]',
+        day: dayjs(new Date(2024, 6, 8))
+    },
+    {
+        title: "Event 4",
+        description: "Event Description",
+        top: 180,
+        color: 'bg-[#ff595e]',
+        day: dayjs(new Date(2024, 6, 8))
+    },
+    {
+        title: "Event 5",
+        description: "Event Description",
+        top: 900,
+        color: 'bg-[#ff6600]',
+        day: dayjs(new Date(2024, 6, 8))
+    },
+  
+   
+  
+];
+export const sampleEvents = [
+    {
+        title: "Event 1",
+        description: "Event Description",
+        top: 0,
+        color: 'bg-blue-500'
+    },
+    {
+        title: "Event 2",
+        description: "Event Description",
+        top: 540,
+        color: 'bg-[#feb94a]'
+    },
+    {
+        title: "Event 3",
+        description: "Event Description",
+        top: 300,
+        color: 'bg-[#0d9937]'
+    },
+    {
+        title: "Event 4",
+        description: "Event Description",
+        top: 120,
+        color: 'bg-[#ff595e]'
+    },
+    {
+        title: "Event 5",
+        description: "Event Description",
+        top: 660,
+        color: 'bg-[#ff6600]'
+    },
+];

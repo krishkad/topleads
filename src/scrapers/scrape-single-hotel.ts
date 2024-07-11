@@ -1,12 +1,18 @@
 "use server"
 import * as cheerio from 'cheerio';
-import { scrapeHotelWebsite, scrapeHotelWebsiteusingAxios, scrapeWebpage, scrapeWebsite } from "./scrape-webpage";
+import {
+    scrapeHotelWebsite,
+    scrapeHotelWebsiteusingAxios,
+    scrapeWebpage,
+    scrapeWebsite
+} from "./scrape-webpage";
 import { HotelDetailsProps } from '@/types/index-types';
 
 
 export async function scrapeSingleHotel(hotelUrl: string) {
     if (!hotelUrl) return;
     try {
+        // const html = await scrapeWebpage(hotelUrl);
         const html = await scrapeWebpage(hotelUrl);
         const $ = cheerio.load(html);
 
@@ -37,6 +43,7 @@ export async function scrapeSingleHotel(hotelUrl: string) {
 };
 
 export async function scrapeHotel(hotels: { url: string }[]) {
+    if (hotels.length === 0) return;
     const hotels_list: any = [];
     const hotelInfo: HotelDetailsProps[] = [];
     try {
@@ -170,17 +177,48 @@ export async function scrapeContactDetails(hotel:
     };
 };
 
+// function extractEmails($: any): string[] | string {
+//     const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
+//     const text = $('body').text();
+//     const a = $('body').find('a').attr('href');
+//     const link = $('body').find('*[role="link"]').attr('href');
+//     const alink = $('body').find('p[role="link"], span[role="link"], div[role="link"] ').attr('href');
+//     const everyElement = $('body').find('*').attr('href');
+//     const tagElements = $('*').attr('href');
+//     const everyTag = $('*').find('*').attr('href');
+
+
+//     const emails = text.match(emailRegex) || a?.match(emailRegex) || link?.match(emailRegex) || alink?.match(emailRegex) || everyElement?.match(emailRegex) || tagElements?.match(emailRegex) || everyTag?.match(emailRegex);
+//     return emails || 'N/A';
+// };
+
 function extractEmails($: any): string[] | string {
     const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
     const text = $('body').text();
     const a = $('body').find('a').attr('href');
     const link = $('body').find('*[role="link"]').attr('href');
-    const alink = $('body').find('p[role="link"], span[role="link"], div[role="link"] ').attr('href');
+    const alink = $('body').find('p[role="link"], span[role="link"], div[role="link"]').attr('href');
     const everyElement = $('body').find('*').attr('href');
     const tagElements = $('*').attr('href');
     const everyTag = $('*').find('*').attr('href');
 
+    let emails: string[] = [];
 
-    const emails = text.match(emailRegex) || a?.match(emailRegex) || link?.match(emailRegex) || alink?.match(emailRegex) || everyElement?.match(emailRegex) || tagElements?.match(emailRegex) || everyTag?.match(emailRegex);
-    return emails || 'N/A';
+    const addEmails = (source: string | undefined) => {
+        if (source) {
+            const matches = source.match(emailRegex);
+            if (matches) emails.push(...matches);
+        }
+    };
+
+    addEmails(text);
+    addEmails(a);
+    addEmails(link);
+    addEmails(alink);
+    addEmails(everyElement);
+    addEmails(tagElements);
+    addEmails(everyTag);
+
+    return emails.length > 0 ? emails : 'N/A';
 };
+

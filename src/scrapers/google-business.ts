@@ -3,7 +3,7 @@ import * as cheerio from 'cheerio';
 import { scrapeWebpage, scrapeWebsite } from "./scrape-webpage";
 
 
-export async function scrapeGoogleMapBusiness(url: string) {
+export async function scrapeGoogleMapBusiness(url: string, num: number) {
     if (!url) return;
     try {
         const html = await scrapeWebsite(url);
@@ -18,8 +18,10 @@ export async function scrapeGoogleMapBusiness(url: string) {
                 return;
             };
             if (href.includes("/maps/place/")) {
-                if (parents.length >= 15) return;
-                parents.push($(el).parent());
+                if (!href.includes("Hilton") && !href.includes("Wyndham") && !href.includes("Hyatt") && !href.includes("IHG")) {
+                    if (parents.length >= num) return;
+                    parents.push($(el).parent());
+                }
             };
 
         });

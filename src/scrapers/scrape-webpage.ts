@@ -1,6 +1,7 @@
 "use server"
 import puppeteer, { Page } from 'puppeteer';
 import axios from 'axios';
+import { chromium } from "playwright"
 
 export async function scrapeWebpage(url: string): Promise<string> {
     try {
@@ -42,7 +43,7 @@ export async function scrapeHotelWebsite(url: string): Promise<string> {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.goto(url, { waitUntil: 'domcontentloaded' });
-        await autoScrollHotelWebsite(page);
+        await autoScrollHotelWebsite(page)
         const html = await page.content();
         await browser.close();
 
@@ -58,6 +59,22 @@ export async function scrapeHotelWebsite(url: string): Promise<string> {
 export async function scrapeHotelWebsiteusingAxios(url: string): Promise<string> {
     try {
         const { data } = await axios.get(url);
+        if (!data || data.includes("Not Found")) {
+            try {
+
+                const browser = await chromium.launch();
+                const page = await browser.newPage();
+                await page.goto(url, { waitUntil: "domcontentloaded" });
+                const html = await page.content();
+                await browser.close();
+
+                return html;
+
+            } catch (error) {
+                console.log(`faild to scrape: ${url} form subscrapeHotelWebsiteusingAxios`);
+                return '';
+            }
+        }
         const html = data;
         return html;
 
