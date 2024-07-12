@@ -36,7 +36,7 @@ const SmallCalendar = () => {
         <Popover>
             <PopoverTrigger asChild>
                 <div className="flex item-center justify-center cursor-pointer">
-                    <h1 className="text-2xl font-semibold">{dayjs(new Date(dayjs().year(), monthNumber)).format('MMMM YYYY')}</h1>
+                    <h1 className="text-sm sm:text-2xl font-semibold">{dayjs(new Date(dayjs().year(), monthNumber)).format('MMMM YYYY')}</h1>
                 </div>
             </PopoverTrigger>
             <PopoverContent className="w-max">
