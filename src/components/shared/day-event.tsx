@@ -24,6 +24,12 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
     const draggableRef = useRef<HTMLDivElement>(null);
 
 
+    // useEffect(() => {
+
+
+    //     console.log({ eventInfo })
+    // }, [eventInfo.top])
+
 
 
     const handleOnDragStart = () => {

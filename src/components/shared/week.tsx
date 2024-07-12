@@ -72,7 +72,7 @@ const Week = () => {
 
             <div className="w-full h-[60px] flex items-center justify-center border">
                 <div className='w-[70px] lg:w-[120px] h-[60px] bg-slate-50 flex justify-start items-center sticky top-0'>
-                    <div className="w-full border-b border-collapse p-3 h-full flex justify-center items-center">
+                    <div className="w-full border-b border-t border-r border-collapse p-3 h-full flex justify-center items-center">
                         <p className="text-sm font-medium">
                             Time
                         </p>
@@ -87,7 +87,7 @@ const Week = () => {
 
                             return (
                                 <div
-                                    className={cn("w-full min-w-[100px] h-full border", check && 'bg-zinc-100 pointer-events-none text-zinc-400')}
+                                    className={cn("w-full min-w-[100px] h-full border-r border-y", check && 'bg-zinc-100 pointer-events-none text-zinc-400')}
                                     key={i}
                                     // ref={weekDayRef}
                                     aria-disabled={check}
@@ -109,7 +109,7 @@ const Week = () => {
                     <div className="w-[70px] lg:w-[120px] grid grid-rows-24">
                         {daysHours.map((time: any, i: number) => {
                             return <div key={i} className='w-full h-[60px] bg-slate-50 flex justify-start items-center'>
-                                <div className="w-full border border-collapse p-3 h-full ">
+                                <div className="w-full border-b border-r border-collapse p-3 h-full ">
                                     <p className="text-sm font-medium">
                                         {time}
                                     </p>
@@ -117,7 +117,7 @@ const Week = () => {
                             </div>
                         })}
                     </div>
-                    <div className="h-[1440px] w-[calc(100%-70px)] lg:w-[calc(100%-120px)] overflow-x-scroll" ref={ref1}>
+                    <div className="h-[1440px] w-[calc(100%-70px)] lg:w-[calc(100%-120px)] overflow-x-scroll no-scrollbar" ref={ref1}>
                         <motion.div className="w-full min-w-max grid grid-cols-7 h-full ">
                             {month[week].map((weekDay: any, i: number) => {
                                 const currentDay = getCurrentDay(dayjs(weekDay));

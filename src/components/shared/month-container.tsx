@@ -9,6 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import MonthHeader from './month-header';
+import MonthFooter from './month-footer';
 
 const MonthContainer = () => {
 
@@ -20,8 +21,9 @@ const MonthContainer = () => {
             <CardContent>
                 <Month />
             </CardContent>
-            {/* <CardFooter className="flex justify-between">
-            </CardFooter> */}
+            <CardFooter className="max-md:flex hidden justify-between">
+                <MonthFooter />
+            </CardFooter>
         </Card>
     )
 }

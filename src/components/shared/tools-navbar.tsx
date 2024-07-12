@@ -27,7 +27,8 @@ import {
     Sheet,
     SheetContent,
     SheetTitle,
-    SheetTrigger
+    SheetTrigger,
+    SheetClose
 } from "@/components/ui/sheet";
 
 
@@ -60,44 +61,59 @@ const ToolsNavbar = () => {
                         </Link>
                     </SheetTitle>
                     <nav className="grid gap-2 text-lg font-medium mt-8">
-                        <Link
-                            href="#"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        >
-                            <Search className="h-5 w-5" />
-                            Search Prospects
-                        </Link>
-                        <Link
-                            href="#"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
-                        >
-                            <Bookmark className="h-5 w-5" />
-                            Saved
-                            <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                                6
-                            </Badge>
-                        </Link>
-                        <Link
-                            href="#"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        >
-                            <BriefcaseBusiness className="h-5 w-5" />
-                            To Do
-                        </Link>
-                        <Link
-                            href="#"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        >
-                            <CalendarCheck className="h-5 w-5" />
-                            Calendar
-                        </Link>
-                        <Link
-                            href="#"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        >
-                            <FolderKanban className="h-5 w-5" />
-                            Email Manager
-                        </Link>
+                        <SheetClose asChild>
+
+                            <Link
+                                href="/tools/search-prospect"
+                                className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                            >
+                                <Search className="h-5 w-5" />
+                                Search Prospects
+                            </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+
+                            <Link
+                                href="/tools/saved"
+                                className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
+                            >
+                                <Bookmark className="h-5 w-5" />
+                                Saved
+                                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                                    6
+                                </Badge>
+                            </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+
+                            <Link
+                                href="/tools/todo"
+                                className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                            >
+                                <BriefcaseBusiness className="h-5 w-5" />
+                                To Do
+                            </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+
+                            <Link
+                                href="/tools/calendar"
+                                className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                            >
+                                <CalendarCheck className="h-5 w-5" />
+                                Calendar
+                            </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+
+                            <Link
+                                href="/tools/email-manager"
+                                className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                            >
+                                <FolderKanban className="h-5 w-5" />
+                                Email Manager
+                            </Link>
+                        </SheetClose>
                     </nav>
                 </SheetContent>
             </Sheet>
@@ -121,7 +137,7 @@ const ToolsNavbar = () => {
                     <DropdownMenuItem>Logout</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
-        </header>
+        </header >
     )
 }
 

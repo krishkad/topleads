@@ -37,7 +37,7 @@ const Month = () => {
     return (
         <div className={cn('w-full grid grid-cols-7 sm:gap-3', excludeDisabledWeek(month)?.lastRow ? "grid-rows-7" : "grid-rows-6")}>
             {dayHeader.map((day) => {
-                return <div className={cn("w-full shadow-md aspect-square md:aspect-video rounded-md", day.bg, day.text)} key={day.day}>
+                return <div className={cn("w-full md:shadow-md aspect-[9/16] md:aspect-video rounded-md", day.bg, day.text)} key={day.day}>
                     <div className="w-full h-full p-2">
                         <p className="font-medium text-xs lg:text-sm lx:text-base">{day.Label}</p>
                     </div>
@@ -49,7 +49,7 @@ const Month = () => {
                         return <Button
                             variant={'none'}
                             size={'none'}
-                            className={cn(`w-full shadow-md aspect-square md:aspect-video transition-all duration-100 rounded-md`, dayHeader[index].hoverBg, getCurrentDay(day) && dayHeader[index].active)}
+                            className={cn(`w-full shadow-md aspect-[9/16] md:aspect-video transition-all duration-100 md:rounded-md`, dayHeader[index].hoverBg, getCurrentDay(day) && dayHeader[index].active)}
                             key={index}
                             disabled={
                                 new Date(day).getMonth() > new Date(dayjs().year(), monthNumber).getMonth() || new Date(day).getMonth() < new Date(dayjs().year(), monthNumber).getMonth()
@@ -65,7 +65,7 @@ const Month = () => {
                         >
                             <div className="w-full h-full p-2 flex flex-col items-start">
                                 <p className="font-medium text-xs lg:text-sm lx:text-base">{day.format('DD').toString()}</p>
-                                {getCurrentDay(day) && (<p className="font-medium text-xs sm:text-sm ">TODAY</p>)}
+                                {getCurrentDay(day) && (<p className="font-medium text-[10px] sm:text-sm ">TODAY</p>)}
                             </div>
                         </Button>
                     })}

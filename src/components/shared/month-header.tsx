@@ -19,7 +19,9 @@ const MonthHeader = () => {
             <div className="w-full flex justify-between items-center">
                 <SmallCalendar />
                 <div className="flex justify-center items-center gap-2">
-                    <MonthFooter />
+                    <div className="hidden sm:block">
+                        <MonthFooter />
+                    </div>
                     <Button
                         variant={'outline'}
                         onClick={() => {

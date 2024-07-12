@@ -410,6 +410,111 @@ export const sampleWeekEvents = [
     {
         title: "Event 1",
         description: "Event Description",
+        top: 180,
+        color: 'bg-blue-500',
+        day: dayjs(new Date(2024, 6, 14))
+    },
+    {
+        title: "Event 2",
+        description: "Event Description",
+        top: 360,
+        color: 'bg-[#feb94a]',
+        day: dayjs(new Date(2024, 6, 14))
+    },
+    {
+        title: "Event 3",
+        description: "Event Description",
+        top: 720,
+        color: 'bg-[#0d9937]',
+        day: dayjs(new Date(2024, 6, 14))
+    },
+    {
+        title: "Event 4",
+        description: "Event Description",
+        top: 1200,
+        color: 'bg-[#ff595e]',
+        day: dayjs(new Date(2024, 6, 14))
+    },
+    {
+        title: "Event 5",
+        description: "Event Description",
+        top: 830,
+        color: 'bg-[#ff6600]',
+        day: dayjs(new Date(2024, 6, 14))
+    },
+    {
+        title: "Event 1",
+        description: "Event Description",
+        top: 180,
+        color: 'bg-blue-500',
+        day: dayjs(new Date(2024, 6, 17))
+    },
+    {
+        title: "Event 2",
+        description: "Event Description",
+        top: 360,
+        color: 'bg-[#feb94a]',
+        day: dayjs(new Date(2024, 6, 17))
+    },
+    {
+        title: "Event 3",
+        description: "Event Description",
+        top: 720,
+        color: 'bg-[#0d9937]',
+        day: dayjs(new Date(2024, 6, 17))
+    },
+    {
+        title: "Event 4",
+        description: "Event Description",
+        top: 1200,
+        color: 'bg-[#ff595e]',
+        day: dayjs(new Date(2024, 6, 17))
+    },
+    {
+        title: "Event 5",
+        description: "Event Description",
+        top: 830,
+        color: 'bg-[#ff6600]',
+        day: dayjs(new Date(2024, 6, 17))
+    },
+    {
+        title: "Event 1",
+        description: "Event Description",
+        top: 180,
+        color: 'bg-blue-500',
+        day: dayjs(new Date(2024, 6, 16))
+    },
+    {
+        title: "Event 2",
+        description: "Event Description",
+        top: 360,
+        color: 'bg-[#feb94a]',
+        day: dayjs(new Date(2024, 6, 16))
+    },
+    {
+        title: "Event 3",
+        description: "Event Description",
+        top: 720,
+        color: 'bg-[#0d9937]',
+        day: dayjs(new Date(2024, 6, 16))
+    },
+    {
+        title: "Event 4",
+        description: "Event Description",
+        top: 1200,
+        color: 'bg-[#ff595e]',
+        day: dayjs(new Date(2024, 6, 16))
+    },
+    {
+        title: "Event 5",
+        description: "Event Description",
+        top: 830,
+        color: 'bg-[#ff6600]',
+        day: dayjs(new Date(2024, 6, 16))
+    },
+    {
+        title: "Event 1",
+        description: "Event Description",
         top: 360,
         color: 'bg-blue-500',
         day: dayjs(new Date(2024, 6, 8))
@@ -442,9 +547,45 @@ export const sampleWeekEvents = [
         color: 'bg-[#ff6600]',
         day: dayjs(new Date(2024, 6, 8))
     },
-  
-   
-  
+    {
+        title: "Event 1",
+        description: "Event Description",
+        top: 360,
+        color: 'bg-blue-500',
+        day: dayjs(new Date(2024, 6, new Date().getDate()))
+    },
+    {
+        title: "Event 2",
+        description: "Event Description",
+        top: 60,
+        color: 'bg-[#feb94a]',
+        day: dayjs(new Date(2024, 6, new Date().getDate()))
+    },
+    {
+        title: "Event 3",
+        description: "Event Description",
+        top: 480,
+        color: 'bg-[#0d9937]',
+        day: dayjs(new Date(2024, 6, new Date().getDate()))
+    },
+    {
+        title: "Event 4",
+        description: "Event Description",
+        top: 180,
+        color: 'bg-[#ff595e]',
+        day: dayjs(new Date(2024, 6, new Date().getDate()))
+    },
+    {
+        title: "Event 5",
+        description: "Event Description",
+        top: 900,
+        color: 'bg-[#ff6600]',
+        day: dayjs(new Date(2024, 6, new Date().getDate()))
+    },
+
+
+
+
 ];
 export const sampleEvents = [
     {
