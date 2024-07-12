@@ -1,7 +1,7 @@
 "use client";
 import React, { DragEvent, Ref, useEffect, useRef, useState } from 'react';
 import { motion, PanInfo, useMotionValue } from 'framer-motion';
-import { calculateStartAndEndTimes, cn, getTimeInHours } from '@/lib/utils';
+import { calculateStartAndEndTimes, cn, getTimeInHours, roundToNearestFive } from '@/lib/utils';
 import dayjs from 'dayjs';
 import {
     ResizableHandle,
@@ -38,8 +38,9 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
 
             // Calculate the y-axis value relative to the parent element
             const yRelativeToParent = draggableRect.top - parentRect.top;
-            const { start, end } = calculateStartAndEndTimes(yRelativeToParent, eventInfo.height);
-            setEventInfo({ ...eventInfo, startTime: start, endTime: end, top: yRelativeToParent, bottom: yRelativeToParent + eventInfo.height });
+            const yRoundFigure = roundToNearestFive(yRelativeToParent);
+            const { start, end } = calculateStartAndEndTimes(yRoundFigure, eventInfo.height);
+            setEventInfo({ ...eventInfo, startTime: start, endTime: end, top: yRoundFigure, bottom: yRoundFigure + eventInfo.height });
             setOnDragStart(false);
 
 
@@ -55,7 +56,8 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
 
             // Calculate the y-axis value relative to the parent element
             const yRelativeToParent = draggableRect.top - parentRect.top;
-            const { start, end } = calculateStartAndEndTimes(yRelativeToParent, eventInfo.height);
+            const yRoundFigure = roundToNearestFive(yRelativeToParent);
+            const { start, end } = calculateStartAndEndTimes(yRoundFigure, eventInfo.height);
             setEventInfo({ ...eventInfo, startTime: start, endTime: end });
 
         };
