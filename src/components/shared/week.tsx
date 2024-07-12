@@ -25,6 +25,41 @@ const Week = () => {
 
     const dispatch = useAppDispatch();
 
+    const ref1 = useRef(null);
+    const ref2 = useRef(null);
+
+    const syncScroll = (source: any, target: any) => {
+        if (source.current && target.current) {
+            target.current.scrollLeft = source.current.scrollLeft;
+        }
+    };
+
+    useEffect(() => {
+        const element1: any = ref1.current;
+        const element2: any = ref2.current;
+
+        const handleScroll1 = () => {
+            syncScroll(ref1, ref2);
+        };
+
+        const handleScroll2 = () => {
+            syncScroll(ref2, ref1);
+        };
+
+        if (element1 && element2) {
+            element1.addEventListener('scroll', handleScroll1);
+            element2.addEventListener('scroll', handleScroll2);
+        }
+
+        return () => {
+            if (element1 && element2) {
+                element1.removeEventListener('scroll', handleScroll1);
+                element2.removeEventListener('scroll', handleScroll2);
+            }
+        };
+    }, []);
+
+
     useEffect(() => {
         // dispatch(changeWeek(month[week]));
         dispatch(changeWeekNumber(weekIdx));
@@ -36,15 +71,15 @@ const Week = () => {
         <div className="w-full h-full">
 
             <div className="w-full h-[60px] flex items-center justify-center border">
-                <div className='w-[70px] sm:w-[120px] h-[60px] bg-slate-50 flex justify-start items-center sticky top-0'>
+                <div className='w-[70px] lg:w-[120px] h-[60px] bg-slate-50 flex justify-start items-center sticky top-0'>
                     <div className="w-full border-b border-collapse p-3 h-full flex justify-center items-center">
                         <p className="text-sm font-medium">
                             Time
                         </p>
                     </div>
                 </div>
-                <div className="w-[calc(100%-70px)] sm:w-[calc(100%-120px)]">
-                    <div className="w-full grid grid-cols-7 h-[60px] sticky top-0 bg-white z-20">
+                <div className="w-[calc(100%-70px)] lg:w-[calc(100%-120px)] overflow-x-scroll no-scrollbar" ref={ref2} >
+                    <div className="w-full min-w-max grid grid-cols-7 h-[60px] sticky top-0 bg-white z-20">
 
                         {month[week].map((weekDay: any, i: number) => {
                             const currentDay = getCurrentDay(dayjs(weekDay));
@@ -52,7 +87,7 @@ const Week = () => {
 
                             return (
                                 <div
-                                    className={cn("w-full h-full border", check && 'bg-zinc-100 pointer-events-none text-zinc-400')}
+                                    className={cn("w-full min-w-[100px] h-full border", check && 'bg-zinc-100 pointer-events-none text-zinc-400')}
                                     key={i}
                                     // ref={weekDayRef}
                                     aria-disabled={check}
@@ -82,8 +117,8 @@ const Week = () => {
                             </div>
                         })}
                     </div>
-                    <div className="h-[1440px] w-[calc(100%-70px)] lg:w-[calc(100%-120px)]">
-                        <div className="w-full grid grid-cols-7 h-full">
+                    <div className="h-[1440px] w-[calc(100%-70px)] lg:w-[calc(100%-120px)] overflow-x-scroll" ref={ref1}>
+                        <motion.div className="w-full min-w-max grid grid-cols-7 h-full ">
                             {month[week].map((weekDay: any, i: number) => {
                                 const currentDay = getCurrentDay(dayjs(weekDay));
                                 const check = new Date(weekDay).getMonth() > new Date(dayjs().year(), monthNumber).getMonth() || new Date(weekDay).getMonth() < new Date(dayjs().year(), monthNumber).getMonth();
@@ -93,22 +128,34 @@ const Week = () => {
                                 );
 
                                 return (
-                                    <div
-                                        className={cn("w-full h-full border-r", check && 'bg-zinc-100 pointer-events-none text-zinc-400')}
+                                    <motion.div
+                                        className={cn("w-full min-w-[100px] h-full border-r", check && 'bg-zinc-100 pointer-events-none text-zinc-400')}
                                         key={i}
                                         // ref={weekDayRef}
                                         aria-disabled={check}
+                                        onDragOver={(e) => {
+                                            e.preventDefault()
+                                            e.dataTransfer.setData("id", "id")
+
+                                        }}
 
                                     >
-                                        <motion.div className="size-full relative" ref={parentRef}>
+                                        <motion.div className="size-full relative" ref={parentRef} onDragOver={(e) => {
+                                            e.preventDefault();
+                                            console.log('Drag Over');
+                                        }} onDragEnter={() => {
+                                            console.log('Drag Enter')
+                                        }} onDrag={() => {
+                                            console.log("Drag")
+                                        }}>
                                             {filteredEvents.map((event, i) => {
-                                                return <DayEvent parentRef={parentRef} top={event.top} title={event.title} description={event.description} color={event.color} dayConstraintsRef={parentRef} day={weekDay} key={i} />
+                                                return <DayEvent drag={'y'} parentRef={parentRef} top={event.top} title={event.title} description={event.description} color={event.color} dayConstraintsRef={parentRef} day={weekDay} key={i} />
                                             })}
                                         </motion.div>
-                                    </div>
+                                    </motion.div>
                                 )
                             })}
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </div>

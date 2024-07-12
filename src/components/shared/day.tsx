@@ -70,7 +70,7 @@ const Day = () => {
                     ref={parentRef}
                 >
                     {sampleEvents.map((event, i) => {
-                        return <DayEvent parentRef={parentRef} top={event.top} title={event.title} description={event.description} color={event.color} dayConstraintsRef={dayConstraintsRef} day={day} key={i} />
+                        return <DayEvent drag='y' parentRef={parentRef} top={event.top} title={event.title} description={event.description} color={event.color} dayConstraintsRef={dayConstraintsRef} day={day} key={i} />
                     })}
 
 

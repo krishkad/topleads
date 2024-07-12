@@ -9,7 +9,7 @@ import {
     ResizablePanelGroup,
 } from "@/components/ui/resizable"
 
-const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, color }: { dayConstraintsRef: any, day: any, top?: number, parentRef?: any, title: string, description: string, color: string }) => {
+const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, color, drag }: { dayConstraintsRef: any, day: any, top?: number, parentRef?: any, title: string, description: string, color: string, drag: boolean | "x" | "y" }) => {
 
     const y = useMotionValue(0);
     const [eventInfo, setEventInfo] = useState({
@@ -68,7 +68,7 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
         <>
             <motion.div
                 ref={draggableRef}
-                drag={'y'}
+                drag={drag}
                 dragConstraints={dayConstraintsRef}
                 dragTransition={{
                     bounceStiffness: 1000,
