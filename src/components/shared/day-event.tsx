@@ -21,6 +21,25 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
         day: day
     });
     const [onDragStart, setOnDragStart] = useState(false);
+    const [longPressTriggered, setLongPressTriggered] = useState(false);
+    const timeoutRef: any = useRef(null);
+
+    const startPress = () => {
+        setLongPressTriggered(false);
+        timeoutRef.current = setTimeout(() => {
+            setLongPressTriggered(true);
+            // if (onLongPress) {
+            //     onLongPress();
+            // }
+        }, 200);
+    };
+
+    const endPress = () => {
+        clearTimeout(timeoutRef.current);
+        if (!longPressTriggered) {
+            // onClick();
+        }
+    };
     const draggableRef = useRef<HTMLDivElement>(null);
 
 
@@ -64,7 +83,8 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
             const yRelativeToParent = draggableRect.top - parentRect.top;
             const yRoundFigure = roundToNearestFive(yRelativeToParent);
             const { start, end } = calculateStartAndEndTimes(yRoundFigure, eventInfo.height);
-            setEventInfo({ ...eventInfo, startTime: start, endTime: end });
+            // console.log({ yRoundFigure })
+            setEventInfo({ ...eventInfo, startTime: start, endTime: end, top: yRoundFigure });
 
         };
 
@@ -76,7 +96,7 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
         <>
             <motion.div
                 ref={draggableRef}
-                drag={drag}
+                drag={longPressTriggered ? drag : false}
                 dragConstraints={dayConstraintsRef}
                 dragTransition={{
                     bounceStiffness: 1000,
@@ -93,11 +113,16 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
                 }
                 dragElastic={0}
                 style={{ y: eventInfo.top }}
+                onMouseDown={startPress}
+                onMouseUp={endPress}
+                onMouseLeave={endPress}
+                onTouchStart={startPress}
+                onTouchEnd={endPress}
 
 
 
 
-                className={cn(`w-full h-[60px] absolute inset-x-0 p-1 cursor-pointer active:cursor-grabbing`, color ? color : 'bg-blue-500 active:cursor-grab', onDragStart && 'z-10')}>
+                className={cn(`w-full h-[60px] absolute inset-x-0 p-1 cursor-pointer `, color ? color : 'bg-blue-500', onDragStart && 'z-10', longPressTriggered && 'active:cursor-grabbing')}>
                 <div
                     className="w-full h-full"
                 >
