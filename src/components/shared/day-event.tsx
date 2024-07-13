@@ -8,6 +8,8 @@ import {
     ResizablePanel,
     ResizablePanelGroup,
 } from "@/components/ui/resizable"
+import { Badge } from '../ui/badge';
+
 
 const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, color, drag }: { dayConstraintsRef: any, day: any, top?: number, parentRef?: any, title: string, description: string, color: string, drag: boolean | "x" | "y" }) => {
 
@@ -21,33 +23,10 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
         day: day
     });
     const [onDragStart, setOnDragStart] = useState(false);
-    const [longPressTriggered, setLongPressTriggered] = useState(false);
-    const timeoutRef: any = useRef(null);
-
-    const startPress = () => {
-        setLongPressTriggered(false);
-        timeoutRef.current = setTimeout(() => {
-            setLongPressTriggered(true);
-            // if (onLongPress) {
-            //     onLongPress();
-            // }
-        }, 200);
-    };
-
-    const endPress = () => {
-        clearTimeout(timeoutRef.current);
-        if (!longPressTriggered) {
-            // onClick();
-        }
-    };
     const draggableRef = useRef<HTMLDivElement>(null);
+    const [longPressTriggered, setLongPressTriggered] = useState(false)
 
 
-    // useEffect(() => {
-
-
-    //     console.log({ eventInfo })
-    // }, [eventInfo.top])
 
 
 
@@ -57,6 +36,7 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
 
 
     const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+
         if (parentRef.current && draggableRef.current) {
             const parentRect = parentRef.current.getBoundingClientRect();
             const draggableRect = draggableRef.current.getBoundingClientRect();
@@ -67,6 +47,7 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
             const { start, end } = calculateStartAndEndTimes(yRoundFigure, eventInfo.height);
             setEventInfo({ ...eventInfo, startTime: start, endTime: end, top: yRoundFigure, bottom: yRoundFigure + eventInfo.height });
             setOnDragStart(false);
+            setLongPressTriggered(false);
 
 
         };
@@ -75,6 +56,7 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
 
 
     const handleOnDrag = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+
         if (parentRef.current && draggableRef.current) {
             const parentRect = parentRef.current.getBoundingClientRect();
             const draggableRect = draggableRef.current.getBoundingClientRect();
@@ -86,14 +68,16 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
             // console.log({ yRoundFigure })
             setEventInfo({ ...eventInfo, startTime: start, endTime: end, top: yRoundFigure });
 
-        };
 
+        }
     }
 
 
 
     return (
         <>
+
+
             <motion.div
                 ref={draggableRef}
                 drag={longPressTriggered ? drag : false}
@@ -113,16 +97,10 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
                 }
                 dragElastic={0}
                 style={{ y: eventInfo.top }}
-                onMouseDown={startPress}
-                onMouseUp={endPress}
-                onMouseLeave={endPress}
-                onTouchStart={startPress}
-                onTouchEnd={endPress}
+                onClick={() => setLongPressTriggered(true)}
 
 
-
-
-                className={cn(`w-full h-[60px] absolute inset-x-0 p-1 cursor-pointer `, color ? color : 'bg-blue-500', onDragStart && 'z-10', longPressTriggered && 'active:cursor-grabbing')}>
+                className={cn(`w-full h-[60px] absolute inset-x-0 p-1 cursor-pointer `, color ? color : 'bg-blue-500', onDragStart && 'z-10')}>
                 <div
                     className="w-full h-full"
                 >
@@ -135,6 +113,10 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
                             <p className="font-medium text-white text-xs">{description}</p>
                         </>}
                     </div>
+                    <div className="">
+                       
+                    </div>
+
                 </div>
             </motion.div >
         </>

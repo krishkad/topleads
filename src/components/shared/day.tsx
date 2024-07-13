@@ -47,7 +47,7 @@ const Day = () => {
     return (
 
         <div className='w-full'>
-            <div className="h-max flex justify-center">
+            <div className="h-max flex justify-center" >
                 <motion.div ref={dayConstraintsRef} className="w-[120px] grid grid-rows-24">
                     {Deday.map((time: any, i: number) => {
                         return <div key={i} className='w-full h-[60px] bg-slate-50 flex justify-start items-center'>

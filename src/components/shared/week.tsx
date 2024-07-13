@@ -4,7 +4,7 @@ import { cn, deserializeDayHours, deserializeMonth, excludeDisabledWeek, getCurr
 import { changeWeek, changeWeekNumber } from '@/redux/features/calendar-slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks/redux-hooks';
 import dayjs from 'dayjs';
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import DayEvent from './day-event';
 import { motion } from 'framer-motion'
 
@@ -19,7 +19,6 @@ const Week = () => {
     const weekIdx = getCurrentWeekInMonth(month);
     // const weekDayRef = useRef(null);
     const parentRef = useRef(null);
-    // const 
 
     const weekParentRef = useRef(null)
 
@@ -104,7 +103,7 @@ const Week = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full h-[calc(100dvh-200px)] overflow-x-hidden overflow-y-scroll no-scrollbar relative border-r border-b border-l border-collapse">
+            <div className="w-full h-[calc(100dvh-200px)] overflow-x-hidden overflow-y-scroll no-scrollbar relative border-r border-b border-l border-collapse" >
                 <div className="w-full h-max flex items-center justify-center">
                     <div className="w-[70px] lg:w-[120px] grid grid-rows-24">
                         {daysHours.map((time: any, i: number) => {
