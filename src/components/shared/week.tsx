@@ -12,6 +12,7 @@ import {
     ResizablePanel,
     ResizablePanelGroup,
 } from "@/components/ui/resizable"
+import SchedulerDialog from './scheduler-dialog';
 
 
 const Week = () => {
@@ -28,6 +29,7 @@ const Week = () => {
     const weekParentRef = useRef(null)
     const [dialogOpen, setDialogOpen] = useState(false);
     const [lastTap, setLastTap] = useState(0);
+    const [eventDate, setEventDate] = useState<{ day: any, time: string }>({ day: dayjs(new Date()), time: '' });
 
     const dispatch = useAppDispatch();
 
@@ -72,10 +74,16 @@ const Week = () => {
     }, [])
 
 
+    const handleDialogOpen = (day: any, time?: string) => {
+        setDialogOpen(true);
+        setEventDate({ day: dayjs(day), time: time || '' });
+    }
+
+
 
     const handleDoubleTap = (day: any, time?: string) => {
         setDialogOpen(true);
-        // setselectDay({ day: day.toISOString(), time: time || '' });
+        setEventDate({ day: dayjs(day), time: time || '' });
     };
 
     const handleTouchEnd = (day: any, time?: string) => {
@@ -140,9 +148,9 @@ const Week = () => {
                         })}
                     </div>
                     <div className="h-[1440px] w-[calc(100%-70px)] lg:w-[calc(100%-120px)] overflow-x-scroll no-scrollbar" ref={ref1}>
-                        <motion.div className="w-full min-w-max grid grid-cols-7 h-full " >
+                        <motion.div className="w-full min-w-max grid grid-cols-7 h-full ">
                             {month[week].map((weekDay: any, i: number) => {
-                                const currentDay = getCurrentDay(dayjs(weekDay));
+                                // const currentDay = getCurrentDay(dayjs(weekDay));
                                 const check = new Date(weekDay).getMonth() > new Date(dayjs().year(), monthNumber).getMonth() || new Date(weekDay).getMonth() < new Date(dayjs().year(), monthNumber).getMonth();
 
 
@@ -150,29 +158,37 @@ const Week = () => {
                                 );
 
                                 return (
-                                    <Fragment key={i}>
+                                    <motion.div
+                                        className={cn("w-full min-w-[100px] h-full border-r", check && 'bg-zinc-100 pointer-events-none text-zinc-400')}
+                                        key={i}
+
+                                    >
                                         <motion.div
-                                            className={cn("w-full min-w-[100px] h-full border-r", check && 'bg-zinc-100 pointer-events-none text-zinc-400')}
-                                            // ref={weekDayRef} 
-                                            aria-disabled={check}
+                                            className="size-full relative"
+                                            ref={parentRef}
+                                            onDoubleClick={(e) => {
+                                                handleDialogOpen(dayjs(weekDay));
+                                            }
+                                            }
+                                            onTouchEnd={(e: any) => {
+                                                console.log({ "double-click": e.changedTouches[0].clientY.toString() })
 
-
-
+                                                handleTouchEnd(dayjs(weekDay));
+                                            }}
                                         >
-                                            <motion.div className="size-full relative" ref={parentRef}>
-                                                {filteredEvents.map((event, i) => {
-                                                    return <DayEvent drag={'y'} parentRef={parentRef} top={event.top} title={event.title} description={event.description} color={event.color} dayConstraintsRef={parentRef} day={weekDay} key={i} />
-                                                })}
-                                            </motion.div>
+                                            {filteredEvents.map((event, i) => {
+                                                return <DayEvent drag={'y'} parentRef={parentRef} top={event.top} title={event.title} description={event.description} color={event.color} dayConstraintsRef={parentRef} day={weekDay} key={i} />
+                                            })}
                                         </motion.div>
-                                    </Fragment>
+                                    </motion.div>
                                 )
                             })}
                         </motion.div>
                     </div>
                 </div>
             </div>
-                
+            <SchedulerDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} day={eventDate.day} time={eventDate.time} />
+
         </div>
     )
 }

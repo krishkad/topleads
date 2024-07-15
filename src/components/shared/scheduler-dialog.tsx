@@ -24,7 +24,7 @@ const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time }: { dialogOpen:
     }
     return (
         <Dialog open={dialogOpen} onOpenChange={() => setDialogOpen(false)}>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="w-[90%] sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>
                         <div className="flex justify-start items-baseline gap-2">
