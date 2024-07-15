@@ -306,7 +306,7 @@ export const sampleWeekEvents = [
         title: "Event 1",
         description: "Event Description",
         top: 0,
-        color: 'bg-blue-500',
+        color: 'bg-primary',
         day: dayjs(new Date(2024, 6, 9))
     },
     {
@@ -341,7 +341,7 @@ export const sampleWeekEvents = [
         title: "Event 1",
         description: "Event Description",
         top: 0,
-        color: 'bg-blue-500',
+        color: 'bg-primary',
         day: dayjs(new Date(2024, 6, 11))
     },
     {
@@ -376,7 +376,7 @@ export const sampleWeekEvents = [
         title: "Event 1",
         description: "Event Description",
         top: 180,
-        color: 'bg-blue-500',
+        color: 'bg-primary',
         day: dayjs(new Date(2024, 6, 10))
     },
     {
@@ -411,7 +411,7 @@ export const sampleWeekEvents = [
         title: "Event 1",
         description: "Event Description",
         top: 180,
-        color: 'bg-blue-500',
+        color: 'bg-primary',
         day: dayjs(new Date(2024, 6, 14))
     },
     {
@@ -446,7 +446,7 @@ export const sampleWeekEvents = [
         title: "Event 1",
         description: "Event Description",
         top: 180,
-        color: 'bg-blue-500',
+        color: 'bg-primary',
         day: dayjs(new Date(2024, 6, 17))
     },
     {
@@ -481,7 +481,7 @@ export const sampleWeekEvents = [
         title: "Event 1",
         description: "Event Description",
         top: 180,
-        color: 'bg-blue-500',
+        color: 'bg-primary',
         day: dayjs(new Date(2024, 6, 16))
     },
     {
@@ -516,7 +516,7 @@ export const sampleWeekEvents = [
         title: "Event 1",
         description: "Event Description",
         top: 360,
-        color: 'bg-blue-500',
+        color: 'bg-primary',
         day: dayjs(new Date(2024, 6, 8))
     },
     {
@@ -551,7 +551,7 @@ export const sampleWeekEvents = [
         title: "Event 1",
         description: "Event Description",
         top: 360,
-        color: 'bg-blue-500',
+        color: 'bg-primary',
         day: dayjs(new Date(2024, 6, new Date().getDate()))
     },
     {
@@ -592,7 +592,7 @@ export const sampleEvents = [
         title: "Event 1",
         description: "Event Description",
         top: 0,
-        color: 'bg-blue-500'
+        color: 'bg-primary'
     },
     {
         title: "Event 2",

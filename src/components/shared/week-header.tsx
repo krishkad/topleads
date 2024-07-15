@@ -41,7 +41,7 @@ const WeekHeader = () => {
                         <Button size={'icon'} variant={'outline'} onClick={() => dispatch(changeWeekNumber(weekNumber + 1))} disabled={weekNumber + 1 >= month.length} className='max-md:hidden'>
                             <ChevronRight className='w-4 h-4' />
                         </Button>
-                        <Button variant={'outline'} className='flex items-center justify-center gap-2 hover:bg-blue-500 hover:text-white'>
+                        <Button variant={'outline'} className='flex items-center justify-center gap-2 hover:bg-primary hover:text-white'>
                             <Plus className='w-4 h-4' />
                             Event
                         </Button>

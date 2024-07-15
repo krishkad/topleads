@@ -115,7 +115,7 @@ const Week = () => {
                                     aria-disabled={check}
 
                                 >
-                                    <div className={cn("w-full h-full border-collapse flex flex-col justify-center items-center", currentDay && 'bg-blue-500 text-white')}>
+                                    <div className={cn("w-full h-full border-collapse flex flex-col justify-center items-center", currentDay && 'bg-primary text-white')}>
                                         <p className="font-medium text-xs sm:text-base">{weekDay.format('ddd')}
                                         </p>
                                         <p className="font-medium text-xs sm:text-sm">{weekDay.format('DD')}</p>
