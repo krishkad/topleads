@@ -40,16 +40,16 @@ const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time }: { dialogOpen:
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
-                            Name
+                        <Label htmlFor="title" className="text-right">
+                            Title
                         </Label>
-                        <Input id="name" value="Pedro Duarte" onChange={handleSchedularTask} className="col-span-3" />
+                        <Input id="title" value="Pedro Duarte" onChange={handleSchedularTask} className="col-span-3" />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="username" className="text-right">
-                            Username
+                        <Label htmlFor="description" className="text-right">
+                            Description
                         </Label>
-                        <Input id="username" value="@peduarte" onChange={handleSchedularTask} className="col-span-3" />
+                        <Input id="description" value="@peduarte" onChange={handleSchedularTask} className="col-span-3" />
                     </div>
                 </div>
                 <DialogFooter>

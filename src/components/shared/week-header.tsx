@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { Button } from '../ui/button'
-import { Calendar, CalendarRange, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Calendar, CalendarRange, ChevronLeft, ChevronRight, Plus } from 'lucide-react'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks/redux-hooks'
 import { changeCalendarProp, changeWeekNumber } from '@/redux/features/calendar-slice'
 import { deserializeMonth, excludeDisabledWeek, getCurrentWeekInMonth } from '@/lib/utils';
@@ -35,11 +35,15 @@ const WeekHeader = () => {
                 </div>
                 <div className="flex justify-center items-center gap-4">
                     <div className="flex justify-center items-center gap-2">
-                        <Button size={'icon'} variant={'outline'} onClick={() => dispatch(changeWeekNumber(weekNumber - 1))} disabled={weekNumber === 0}>
+                        <Button size={'icon'} variant={'outline'} onClick={() => dispatch(changeWeekNumber(weekNumber - 1))} disabled={weekNumber === 0} className='max-md:hidden'>
                             <ChevronLeft className='w-4 h-4' />
                         </Button>
-                        <Button size={'icon'} variant={'outline'} onClick={() => dispatch(changeWeekNumber(weekNumber + 1))} disabled={weekNumber + 1 >= month.length}>
+                        <Button size={'icon'} variant={'outline'} onClick={() => dispatch(changeWeekNumber(weekNumber + 1))} disabled={weekNumber + 1 >= month.length} className='max-md:hidden'>
                             <ChevronRight className='w-4 h-4' />
+                        </Button>
+                        <Button variant={'outline'} className='flex items-center justify-center gap-2 hover:bg-blue-500 hover:text-white'>
+                            <Plus className='w-4 h-4' />
+                            Event
                         </Button>
                         <Button variant={'outline'} onClick={() => dispatch(changeWeekNumber(weekIdx))} className='flex items-center justify-center gap-2'>
                             <CalendarRange className='w-4 h-4' />
