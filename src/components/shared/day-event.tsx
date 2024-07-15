@@ -68,24 +68,24 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
             // console.log({ yRoundFigure })
             setEventInfo({ ...eventInfo, startTime: start, endTime: end, top: yRoundFigure });
         }
-        checkIntersection();
+        // checkIntersection();
     };
 
 
-    const checkIntersection = () => {
-        if (draggableRef.current && targetRef.current) {
-            const draggableRect = draggableRef.current.getBoundingClientRect();
-            const targetRect = targetRef.current.getBoundingClientRect();
-            if (
-                draggableRect.left < targetRect.right &&
-                draggableRect.right > targetRect.left &&
-                draggableRect.top < targetRect.bottom &&
-                draggableRect.bottom > targetRect.top
-            ) {
-                console.log("Elements are intersecting!");
-            }
-        }
-    };
+    // const checkIntersection = () => {
+    //     if (draggableRef.current && targetRef.current) {
+    //         const draggableRect = draggableRef.current.getBoundingClientRect();
+    //         const targetRect = targetRef.current.getBoundingClientRect();
+    //         if (
+    //             draggableRect.left < targetRect.right &&
+    //             draggableRect.right > targetRect.left &&
+    //             draggableRect.top < targetRect.bottom &&
+    //             draggableRect.bottom > targetRect.top
+    //         ) {
+    //             console.log("Elements are intersecting!");
+    //         }
+    //     }
+    // };
 
 
     return (

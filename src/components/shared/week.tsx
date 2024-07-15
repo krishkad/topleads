@@ -25,11 +25,15 @@ const Week = () => {
     const month = excludeDisabledWeek(rawMonth)?.month;
     const weekIdx = getCurrentWeekInMonth(month);
     // const weekDayRef = useRef(null);
-    const parentRef = useRef(null);
+    const parentRef = useRef<HTMLDivElement>(null);
     const weekParentRef = useRef(null)
     const [dialogOpen, setDialogOpen] = useState(false);
     const [lastTap, setLastTap] = useState(0);
-    const [eventDate, setEventDate] = useState<{ day: any, time: string }>({ day: dayjs(new Date()), time: '' });
+    const [eventDate, setEventDate] = useState<{ day: any, y: number }>
+        ({
+            day: dayjs(new Date()),
+            y: 0
+        });
 
     const dispatch = useAppDispatch();
 
@@ -74,24 +78,28 @@ const Week = () => {
     }, [])
 
 
-    const handleDialogOpen = (day: any, time?: string) => {
+    const handleDialogOpen = (day: any, y: number) => {
         setDialogOpen(true);
-        setEventDate({ day: dayjs(day), time: time || '' });
+        if (parentRef.current) {
+            const parentRect = parentRef.current.getBoundingClientRect();
+            const yPositon = y - parentRect.top;
+            setEventDate({ day: dayjs(day), y: yPositon || 0 });
+        }
     }
 
 
 
-    const handleDoubleTap = (day: any, time?: string) => {
-        setDialogOpen(true);
-        setEventDate({ day: dayjs(day), time: time || '' });
-    };
+    // const handleDoubleTap = (day: any, y: number) => {
+    //     setDialogOpen(true);
+    //     setEventDate({ day: dayjs(day), y: y || 0 });
+    // };
 
-    const handleTouchEnd = (day: any, time?: string) => {
+    const handleTouchEnd = (day: any, y: number) => {
         const now = Date.now();
         const DOUBLE_TAP_DELAY = 300;
 
         if (lastTap && (now - lastTap) < DOUBLE_TAP_DELAY) {
-            handleDoubleTap(day, time);
+            handleDialogOpen(day, y);
         }
         setLastTap(now);
     };
@@ -167,13 +175,13 @@ const Week = () => {
                                             className="size-full relative"
                                             ref={parentRef}
                                             onDoubleClick={(e) => {
-                                                handleDialogOpen(dayjs(weekDay));
-                                            }
-                                            }
+                                                const y = e.clientY.toString();
+                                                handleDialogOpen(dayjs(weekDay), parseInt(y));
+                                            }}
                                             onTouchEnd={(e: any) => {
-                                                console.log({ "double-click": e.changedTouches[0].clientY.toString() })
+                                                const y = e.changedTouches[0].clientY.toString()
 
-                                                handleTouchEnd(dayjs(weekDay));
+                                                handleTouchEnd(dayjs(weekDay), parseInt(y));
                                             }}
                                         >
                                             {filteredEvents.map((event, i) => {
@@ -187,7 +195,7 @@ const Week = () => {
                     </div>
                 </div>
             </div>
-            <SchedulerDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} day={eventDate.day} time={eventDate.time} />
+            <SchedulerDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} day={eventDate.day} y={eventDate.y} />
 
         </div>
     )

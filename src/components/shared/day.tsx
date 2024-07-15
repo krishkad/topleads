@@ -77,7 +77,7 @@ const Day = () => {
 
                 </div>
             </div>
-            <SchedulerDialog day={day} time={selectDay.time} dialogOpen={dialogOpen} setDialogOpen={setdialogOpen} />
+            <SchedulerDialog day={day} time={selectDay.time} dialogOpen={dialogOpen} setDialogOpen={setdialogOpen} y={0} />
         </div>
     )
 }
