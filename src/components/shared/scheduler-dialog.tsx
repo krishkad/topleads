@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import {
     Dialog,
     DialogContent,
@@ -19,7 +19,24 @@ import { Textarea } from '../ui/textarea';
 
 const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y }: { dialogOpen: boolean, setDialogOpen: (value: boolean) => void, day: any, time?: string, y: number }) => {
 
-    const handleSchedularTask = (e: any) => {
+    const [eventInfo, setEventInfo] = useState({
+        title: '',
+        description: '',
+        yTop: roundToNearestFive(y),
+        yEnd: 0,
+        timeStart: '',
+        timeEnd: '',
+        day: day.toISOString(),
+        bgColor: '',
+        height: 60,
+    })
+
+
+    const handleOnChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        e.preventDefault();
+        setEventInfo({ ...eventInfo, [e.target.name]: e.target.value })
+    }
+    const handleSchedularTask = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         e.preventDefault();
 
     }
@@ -45,11 +62,11 @@ const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y }: { dialogOp
                     <div className="w-full flex flex-col justify-center items-center">
                         <div className="w-full">
                             <Label htmlFor='title'>Title</Label>
-                            <Input id='title' name='title' placeholder='Enter title' className=' focus-visible:ring-0 focus-visible:ring-offset-0' />
+                            <Input id='title' name='title' placeholder='Enter title' className=' focus-visible:ring-0 focus-visible:ring-offset-0' onChange={handleOnChange} />
                         </div>
                         <div className="w-full">
                             <Label htmlFor='description'>Description</Label>
-                            <Textarea id='description' name='description' placeholder='Enter description' className=' focus-visible:ring-0 focus-visible:ring-offset-0' />
+                            <Textarea id='description' name='description' placeholder='Enter description' className=' focus-visible:ring-0 focus-visible:ring-offset-0' onChange={handleOnChange} />
                         </div>
                     </div>
                     <div className="w-full space-y-2">
@@ -64,7 +81,7 @@ const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y }: { dialogOp
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type="submit">Save changes</Button>
+                    <Button onClick={() => console.log({ eventInfo })}>Save changes</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
