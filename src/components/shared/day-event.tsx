@@ -24,15 +24,13 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
     });
     const [onDragStart, setOnDragStart] = useState(false);
     const draggableRef = useRef<HTMLDivElement>(null);
-    const [longPressTriggered, setLongPressTriggered] = useState(false)
-
-
+    const [longPressTriggered, setLongPressTriggered] = useState(false);
 
 
 
     const handleOnDragStart = () => {
         setOnDragStart(true);
-    }
+    };
 
 
     const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
@@ -52,7 +50,7 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
 
         };
 
-    }
+    };
 
 
     const handleOnDrag = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
@@ -70,8 +68,7 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
 
 
         }
-    }
-
+    };
 
 
     return (
@@ -80,7 +77,8 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
 
             <motion.div
                 ref={draggableRef}
-                drag={longPressTriggered ? drag : false}
+                drag={drag}
+                dragListener={longPressTriggered ? true : false}
                 dragConstraints={dayConstraintsRef}
                 dragTransition={{
                     bounceStiffness: 1000,
@@ -99,10 +97,9 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
                 style={{ y: eventInfo.top }}
                 onClick={() => setLongPressTriggered(true)}
 
-
                 className={cn(`w-full h-[60px] absolute inset-x-0 p-1 cursor-pointer `, color ? color : 'bg-blue-500', onDragStart && 'z-10')}>
                 <div
-                    className="w-full h-full"
+                    className="w-full h-full relative"
                 >
                     <div className="w-full">
                         {onDragStart ? <>
@@ -113,9 +110,7 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
                             <p className="font-medium text-white text-xs">{description}</p>
                         </>}
                     </div>
-                    <div className="">
-                       
-                    </div>
+                    {longPressTriggered && <div className="w-2 h-2 bg-white rounded-full absolute top-1 right-1" />}
 
                 </div>
             </motion.div >
