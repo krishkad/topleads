@@ -103,6 +103,18 @@ export function roundToNearestFive(num: number): number {
   } else {
     return num - remainder;
   }
+};
+
+export function roundToNearestSixty(num: number): number {
+  const remainder = num % 60;
+  if (remainder === 0) {
+    return num;
+  }
+  if (remainder >= 30) {
+    return num + (60 - remainder);
+  } else {
+    return num - remainder;
+  }
 }
 
 export function getCurrentWeekInMonth(month: any) {

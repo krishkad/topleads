@@ -13,13 +13,14 @@ import { Button } from '../ui/button';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from '../ui/badge';
-import { cn, getCurrentDay, getTimeInHours, roundToNearestFive } from '@/lib/utils';
+import { cn, getCurrentDay, getTimeInHours, roundToNearestFive, roundToNearestSixty } from '@/lib/utils';
 import dayjs from 'dayjs';
 import { Textarea } from '../ui/textarea';
 import { sampleEvents } from '@/constant/constant';
+import { Check, CircleCheck } from 'lucide-react';
 
 const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y, eventList, setEventList }: { dialogOpen: boolean, setDialogOpen: (value: boolean) => void, day: any, time?: string, y: number, eventList: any, setEventList: (value: any) => void }) => {
-    const yPosition = roundToNearestFive(y);
+    const yPosition = roundToNearestSixty(y);
 
     const [eventInfo, setEventInfo] = useState({
         title: '',
@@ -54,7 +55,7 @@ const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y, eventList, s
                 <DialogHeader>
                     <DialogTitle>
                         <div className="flex justify-start items-baseline gap-2">
-                            <h2 className="text-2xl font-semibold">{getTimeInHours(roundToNearestFive(y))}</h2>
+                            <h2 className="text-2xl font-semibold">{getTimeInHours(roundToNearestSixty(y))}</h2>
                             <div className="flex justify-center items-baseline">
                                 {getCurrentDay(day) ? <Badge variant={'secondary'} className="text-xs font-semibold">Today</Badge> : <h2 className="text-base font-semibold">{dayjs(new Date(day)).format("DD MMM")}</h2>}
                             </div>
@@ -79,7 +80,10 @@ const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y, eventList, s
                         <Label id='bg-color'>Color</Label>
                         <div className="w-full flex justify-start items-center gap-4">
                             {sampleEvents.map((color: any, i: number) => {
-                                return < div key={i} className={cn("w-5 h-5 rounded-full", color.color)} onClick={() => setEventInfo({ ...eventInfo, color: color.color })} />
+                                const active = eventInfo.color === color.color;
+                                return < div key={i} className={cn("w-5 h-5 rounded-full flex items-center justify-center", color.color, active && 'shadow-md')} onClick={() => setEventInfo({ ...eventInfo, color: color.color })} >
+                                    {active && <Check className='w-3 h-3 text-white stroke-[4px]' />}
+                                </div>
                             })}
                         </div>
                     </div>
@@ -89,7 +93,7 @@ const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y, eventList, s
                     <Button onClick={(e) => {
                         handleSchedularTask(e);
                         setDialogOpen(false);
-                    }}>Save changes</Button>
+                    }} disabled={eventInfo.title.length === 0 || eventInfo.color.length === 0}>Save changes</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
