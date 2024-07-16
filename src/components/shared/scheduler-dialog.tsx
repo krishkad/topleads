@@ -13,9 +13,10 @@ import { Button } from '../ui/button';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from '../ui/badge';
-import { getCurrentDay, getTimeInHours, roundToNearestFive } from '@/lib/utils';
+import { cn, getCurrentDay, getTimeInHours, roundToNearestFive } from '@/lib/utils';
 import dayjs from 'dayjs';
 import { Textarea } from '../ui/textarea';
+import { sampleEvents } from '@/constant/constant';
 
 const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y, eventList, setEventList }: { dialogOpen: boolean, setDialogOpen: (value: boolean) => void, day: any, time?: string, y: number, eventList: any, setEventList: (value: any) => void }) => {
     const yPosition = roundToNearestFive(y);
@@ -77,11 +78,9 @@ const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y, eventList, s
                     <div className="w-full space-y-2">
                         <Label id='bg-color'>Color</Label>
                         <div className="w-full flex justify-start items-center gap-4">
-                            <div className="w-5 h-5 rounded-full bg-blue-500" onClick={() => setEventInfo({ ...eventInfo, color: 'bg-blue-500' })} />
-                            <div className="w-5 h-5 rounded-full bg-[#ff595e]" onClick={() => setEventInfo({ ...eventInfo, color: 'bg-yellow-500' })} />
-                            <div className="w-5 h-5 rounded-full bg-[#ff6600]" onClick={() => setEventInfo({ ...eventInfo, color: 'bg-orange-500' })} />
-                            <div className="w-5 h-5 rounded-full bg-green-700" onClick={() => setEventInfo({ ...eventInfo, color: 'bg-[#0d9937]' })} />
-                            <div className="w-5 h-5 rounded-full bg-red-500" onClick={() => setEventInfo({ ...eventInfo, color: 'bg-[#feb94a]' })} />
+                            {sampleEvents.map((color: any, i: number) => {
+                                return < div key={i} className={cn("w-5 h-5 rounded-full", color.color)} onClick={() => setEventInfo({ ...eventInfo, color: color.color })} />
+                            })}
                         </div>
                     </div>
                 </div>
