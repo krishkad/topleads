@@ -28,6 +28,7 @@ const Day = () => {
     const parentRef = useRef<HTMLDivElement>(null);
 
     const [lastTap, setLastTap] = useState(0);
+    const [eventList, setEventList] = useState(sampleEvents)
 
     const handleDoubleTap = (day: any, time?: string) => {
         setdialogOpen(true);
@@ -69,7 +70,7 @@ const Day = () => {
                     }}
                     ref={parentRef}
                 >
-                    {sampleEvents.map((event, i) => {
+                    {eventList.map((event, i) => {
                         return <DayEvent drag='y' parentRef={parentRef} top={event.top} title={event.title} description={event.description} color={event.color} dayConstraintsRef={dayConstraintsRef} day={day} key={i} />
                     })}
 
@@ -77,7 +78,7 @@ const Day = () => {
 
                 </div>
             </div>
-            <SchedulerDialog day={day} time={selectDay.time} dialogOpen={dialogOpen} setDialogOpen={setdialogOpen} y={0} />
+            <SchedulerDialog day={day} time={selectDay.time} dialogOpen={dialogOpen} setDialogOpen={setdialogOpen} y={0} eventList={eventList} setEventList={setEventList} />
         </div>
     )
 }

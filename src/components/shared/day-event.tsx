@@ -116,7 +116,7 @@ const DayEvent = ({ dayConstraintsRef, day, top, parentRef, title, description, 
                     e.preventDefault();
                     console.log("Drag Over")
                 }}
-                className={cn(`w-full h-[${eventInfo.height}px] absolute inset-x-0 p-1 cursor-pointer `, color ? color : 'bg-blue-500', onDragStart && 'z-10')}>
+                className={cn(`w-full h-[${eventInfo.height}px] absolute inset-x-0 p-1 cursor-pointer `, color ? color : 'bg-primary', onDragStart && 'z-10')}>
 
 
                 <div className="w-full h-full relative" ref={!longPressTriggered ? targetRef : undefined

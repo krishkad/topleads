@@ -34,7 +34,7 @@ const Week = () => {
             day: dayjs(new Date()),
             y: 0
         });
-
+    const [eventList, setEventList] = useState(sampleWeekEvents)
     const dispatch = useAppDispatch();
 
     const ref1 = useRef(null);
@@ -75,7 +75,8 @@ const Week = () => {
     useEffect(() => {
         // dispatch(changeWeek(month[week]));
         dispatch(changeWeekNumber(weekIdx));
-    }, [])
+        console.log({ eventList })
+    }, [eventList])
 
 
     const handleDialogOpen = (day: any, y: number) => {
@@ -83,7 +84,7 @@ const Week = () => {
         if (parentRef.current) {
             const parentRect = parentRef.current.getBoundingClientRect();
             const yPositon = y - parentRect.top;
-            setEventDate({ day: dayjs(day), y: yPositon || 0 });
+            setEventDate({ day: day, y: yPositon ? yPositon : 0 });
         }
     }
 
@@ -162,7 +163,7 @@ const Week = () => {
                                 const check = new Date(weekDay).getMonth() > new Date(dayjs().year(), monthNumber).getMonth() || new Date(weekDay).getMonth() < new Date(dayjs().year(), monthNumber).getMonth();
 
 
-                                const filteredEvents = sampleWeekEvents.filter((event) => event.day.format('YYYY MM DD') === weekDay.format('YYYY MM DD')
+                                const filteredEvents = eventList.filter((event) => event.day.format('YYYY MM DD') === weekDay.format('YYYY MM DD')
                                 );
 
                                 return (
@@ -176,12 +177,12 @@ const Week = () => {
                                             ref={parentRef}
                                             onDoubleClick={(e) => {
                                                 const y = e.clientY.toString();
-                                                handleDialogOpen(dayjs(weekDay), parseInt(y));
+                                                handleDialogOpen(weekDay, parseInt(y));
                                             }}
                                             onTouchEnd={(e: any) => {
                                                 const y = e.changedTouches[0].clientY.toString()
 
-                                                handleTouchEnd(dayjs(weekDay), parseInt(y));
+                                                handleTouchEnd(weekDay, parseInt(y));
                                             }}
                                         >
                                             {filteredEvents.map((event, i) => {
@@ -195,7 +196,7 @@ const Week = () => {
                     </div>
                 </div>
             </div>
-            <SchedulerDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} day={eventDate.day} y={eventDate.y} />
+            <SchedulerDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} day={eventDate.day} y={eventDate.y} eventList={eventList} setEventList={setEventList} />
 
         </div>
     )

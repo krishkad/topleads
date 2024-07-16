@@ -1,5 +1,5 @@
-"use client"
-import React, { ChangeEvent, useState } from 'react'
+"use client";
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import {
     Dialog,
     DialogContent,
@@ -8,38 +8,43 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import { Button } from '../ui/button';
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Badge } from '../ui/badge';
 import { getCurrentDay, getTimeInHours, roundToNearestFive } from '@/lib/utils';
 import dayjs from 'dayjs';
 import { Textarea } from '../ui/textarea';
 
-const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y }: { dialogOpen: boolean, setDialogOpen: (value: boolean) => void, day: any, time?: string, y: number }) => {
+const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y, eventList, setEventList }: { dialogOpen: boolean, setDialogOpen: (value: boolean) => void, day: any, time?: string, y: number, eventList: any, setEventList: (value: any) => void }) => {
+    const yPosition = roundToNearestFive(y);
 
     const [eventInfo, setEventInfo] = useState({
         title: '',
         description: '',
-        yTop: roundToNearestFive(y),
-        yEnd: 0,
-        timeStart: '',
-        timeEnd: '',
-        day: day.toISOString(),
-        bgColor: '',
+        top: yPosition,
+        day: day,
         height: 60,
-    })
+        color: ''
+    });
 
 
     const handleOnChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         e.preventDefault();
-        setEventInfo({ ...eventInfo, [e.target.name]: e.target.value })
-    }
-    const handleSchedularTask = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setEventInfo({ ...eventInfo, [e.target.name]: e.target.value, top: yPosition, day });
+    };
+    const handleSchedularTask = (e: any) => {
         e.preventDefault();
+        eventList.push(eventInfo);
+        setEventList(eventList);
+        console.log({ list: eventList });
+    };
 
-    }
+    // useEffect(() => {
+    //     console.log({ yPosition });
+    //     console.log({  });
+    // }, [yPosition]);
 
 
     return (
@@ -66,22 +71,26 @@ const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y }: { dialogOp
                         </div>
                         <div className="w-full">
                             <Label htmlFor='description'>Description</Label>
-                            <Textarea id='description' name='description' placeholder='Enter description' className=' focus-visible:ring-0 focus-visible:ring-offset-0' onChange={handleOnChange} />
+                            <Textarea id='description' name='description' placeholder='Enter description' className=' focus-visible:ring-0 focus-visible:ring-offset-0 resize-none' onChange={handleOnChange} />
                         </div>
                     </div>
                     <div className="w-full space-y-2">
                         <Label id='bg-color'>Color</Label>
                         <div className="w-full flex justify-start items-center gap-4">
-                            <div className="w-5 h-5 rounded-full bg-blue-500" />
-                            <div className="w-5 h-5 rounded-full bg-yellow-500" />
-                            <div className="w-5 h-5 rounded-full bg-orange-500" />
-                            <div className="w-5 h-5 rounded-full bg-green-700" />
-                            <div className="w-5 h-5 rounded-full bg-red-500" />
+                            <div className="w-5 h-5 rounded-full bg-blue-500" onClick={() => setEventInfo({ ...eventInfo, color: 'bg-blue-500' })} />
+                            <div className="w-5 h-5 rounded-full bg-[#ff595e]" onClick={() => setEventInfo({ ...eventInfo, color: 'bg-yellow-500' })} />
+                            <div className="w-5 h-5 rounded-full bg-[#ff6600]" onClick={() => setEventInfo({ ...eventInfo, color: 'bg-orange-500' })} />
+                            <div className="w-5 h-5 rounded-full bg-green-700" onClick={() => setEventInfo({ ...eventInfo, color: 'bg-[#0d9937]' })} />
+                            <div className="w-5 h-5 rounded-full bg-red-500" onClick={() => setEventInfo({ ...eventInfo, color: 'bg-[#feb94a]' })} />
                         </div>
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button onClick={() => console.log({ eventInfo })}>Save changes</Button>
+
+                    <Button onClick={(e) => {
+                        handleSchedularTask(e);
+                        setDialogOpen(false);
+                    }}>Save changes</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
