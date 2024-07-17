@@ -110,7 +110,7 @@ export function roundToNearestSixty(num: number): number {
   if (remainder === 0) {
     return num;
   }
-  if (remainder >= 30) {
+  if (remainder >= 50) {
     return num + (60 - remainder);
   } else {
     return num - remainder;
