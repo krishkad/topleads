@@ -43,11 +43,6 @@ const SchedulerDialog = ({ dialogOpen, setDialogOpen, day, time, y, eventList, s
         console.log({ list: eventList });
     };
 
-    // useEffect(() => {
-    //     console.log({ yPosition });
-    //     console.log({  });
-    // }, [yPosition]);
-
 
     return (
         <Dialog open={dialogOpen} onOpenChange={() => setDialogOpen(false)}>
